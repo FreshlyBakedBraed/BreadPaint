@@ -751,7 +751,6 @@
           "type": "FOLDER"
         }
       ],
-      "window": {},
       "className": "FolderNode",
       "path": "options",
       "type": "FOLDER"
@@ -825,8 +824,27 @@
     },
     {
       "className": "ButtonNode",
+      "path": "Clear Current Layer",
+      "type": "TRANSIENT"
+    },
+    {
+      "className": "ButtonNode",
       "path": "Add Layer",
       "type": "TRANSIENT"
+    },
+    {
+      "valueString": "Layer 0",
+      "children": [
+        {
+          "valueBoolean": true,
+          "className": "RadioItemNode",
+          "path": "Layers /Layer 0",
+          "type": "TRANSIENT"
+        }
+      ],
+      "className": "RadioFolderNode",
+      "path": "Layers ",
+      "type": "FOLDER"
     },
     {
       "valueString": "Circle",
@@ -844,7 +862,6 @@
           "type": "TRANSIENT"
         }
       ],
-      "window": {},
       "className": "RadioFolderNode",
       "path": "Brushes",
       "type": "FOLDER"
@@ -890,7 +907,7 @@
           "type": "VALUE"
         },
         {
-          "valueFloat": 0.97,
+          "valueFloat": 0.96862745,
           "currentPrecisionIndex": 2,
           "valueFloatPrecision": 0.01,
           "className": "AlphaNode",
@@ -903,9 +920,59 @@
           "type": "VALUE"
         }
       ],
-      "window": {},
       "className": "ColorPickerFolderNode",
       "path": "Color Picker",
+      "type": "FOLDER"
+    },
+    {
+      "hexString": "FFFFFFFF",
+      "children": [
+        {
+          "className": "ColorPreviewNode",
+          "path": "Background Color/preview",
+          "type": "TRANSIENT"
+        },
+        {
+          "valueFloat": 0.0,
+          "currentPrecisionIndex": 2,
+          "valueFloatPrecision": 0.01,
+          "className": "HueNode",
+          "path": "Background Color/hue",
+          "type": "VALUE"
+        },
+        {
+          "valueFloat": 0.0,
+          "currentPrecisionIndex": 2,
+          "valueFloatPrecision": 0.01,
+          "className": "SaturationNode",
+          "path": "Background Color/sat",
+          "type": "VALUE"
+        },
+        {
+          "valueFloat": 1.0,
+          "currentPrecisionIndex": 2,
+          "valueFloatPrecision": 0.01,
+          "className": "BrightnessNode",
+          "path": "Background Color/br",
+          "type": "VALUE"
+        },
+        {
+          "valueFloat": 1.0,
+          "currentPrecisionIndex": 2,
+          "valueFloatPrecision": 0.01,
+          "className": "AlphaNode",
+          "path": "Background Color/alpha",
+          "type": "VALUE"
+        },
+        {
+          "className": "ColorPickerHexNode",
+          "path": "Background Color/hex",
+          "type": "VALUE"
+        }
+      ],
+      "window": {},
+      "className": "ColorPickerFolderNode",
+      "path": "Background Color",
       "type": "FOLDER"
     }
   ],
