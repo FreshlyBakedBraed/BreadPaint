@@ -9,9 +9,9 @@ ArrayList<String> layer_name;
 int total_created_layers = 1;
 int current_layer = 0;
 public enum State{
- circle,square
+ circle,square,erase
 }
-State currentState = State.square;
+State currentState;
 
 
 
@@ -36,9 +36,17 @@ gui.button("Clear Drawing");
 gui.button("Clear Current Layer");
 gui.button("Add Layer");
 gui.radio("Layer ",layer_name);
-gui.radio("Brushes", new String[] {"Square", "Circle"});
+gui.radio("Brushes", new String[] {"Eraser","Square", "Circle"});
 gui.sliderInt("Brush Size");
 gui.colorPicker("Color Picker");
+
+
+
+
+
+
+
+
 }
 
 
@@ -68,14 +76,6 @@ if(gui.button("Clear Current Layer")){
 
 
 
-
-
-
-
-
-
-
-
 void AddLayer(){
 total_created_layers++;
   for(int c= 0;c<total_created_layers;c++){
@@ -97,18 +97,20 @@ void TimedStatCheck(){
 String selection = gui.radio("Layer ", layer_name);
 for(Integer every : layer_no){
    String tempstr = Integer.toString(every);
-   println("tempstr is " + tempstr);
-   println("selection is "+ selection);
+   //println("tempstr is " + tempstr);
+   //println("selection is "+ selection);
   if(selection.equals("Layer " + tempstr)){
       current_layer = every;
-      println("Current Layer " + current_layer);
+      //println("Current Layer " + current_layer);
   }
 }
-String mode = gui.radio("Brushes", new String[]{"Square", "Circle"});
+String mode = gui.radio("Brushes", new String[]{"Eraser","Square", "Circle"});
 if (mode.equals("Square")) {
     currentState = State.square;
-} else{
+} else if(mode.equals("Circle")){
  currentState = State.circle;
+} else if(mode.equals("Eraser")){
+  currentState = State.erase;
 }
 
 
@@ -123,23 +125,15 @@ for(CurrentDrawing isPixel : drawnpixels){
   rect(isPixel.x_loc,isPixel.y_loc,isPixel.size,isPixel.size);
   } else if(isPixel.timedState == State.circle){
     circle(isPixel.x_loc,isPixel.y_loc,isPixel.size);
+  } else if(isPixel.timedState == State.erase){
+  pushStyle();
+  fill(#FFFFFF);
+  circle(isPixel.x_loc,isPixel.y_loc,isPixel.size);
+  popStyle();
   }
+  
 }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -151,7 +145,14 @@ void mouseDragged(){
  }
 }
 void keyPressed(){
+int d = day();    
+int m = month();  
+int y = year();
+int s = second(); 
+int mi = minute();  
+int h = hour(); 
+
 if (key == 'S'|| key == 's'){
-  save("Latest_drawing.png");
+  save(d+"."+m+"."+y+"_"+h+"."+mi+"."+s+".png");
 }
 }
