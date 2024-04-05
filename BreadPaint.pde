@@ -17,10 +17,10 @@ State currentState;
 
 void setup(){
   
-size(1000,1000,P2D);
+size(1000,1000,P2D); // lazy gui doesnt work unless i specify the P2D bc idk 
 surface.setResizable(false);
 frameRate(60);
-background(#FFFFFF);
+background(#FFFFFF); 
 gui = new LazyGui(this);
 rectMode(CENTER);  
 
@@ -31,7 +31,7 @@ drawnpixels = new ArrayList<CurrentDrawing>();
 layer_name.add("Layer 0");
 layer_no.add(0);
 
-
+ 
 gui.button("Clear Drawing");
 gui.button("Clear Current Layer");
 gui.button("Add Layer");
@@ -40,20 +40,7 @@ gui.radio("Brushes", new String[] {"Eraser","Square", "Circle"});
 gui.sliderInt("Brush Size");
 gui.colorPicker("Color Picker");
 
-
-
-
-
-
-
-
 }
-
-
-
-
-
-
 
 void draw(){
 background(gui.colorPicker("Background Color").hex);
@@ -76,7 +63,8 @@ if(gui.button("Clear Current Layer")){
 
 
 
-void AddLayer(){
+void AddLayer(){ // layer logic. it kinda sux that i have to hard code this with strings thats why im trying to integrate layer information the the class of CurrentDrawing 
+                 //so I can make a more compact class of everything that has to do with the data of the lines including frame information for the animating tool
 total_created_layers++;
   for(int c= 0;c<total_created_layers;c++){
     if(layer_no.contains(c)){
@@ -105,7 +93,7 @@ for(Integer every : layer_no){
   }
 }
 String mode = gui.radio("Brushes", new String[]{"Eraser","Square", "Circle"});
-if (mode.equals("Square")) {
+if (mode.equals("Square")) { // selection of brushes. might add the ability to make custom brushes soon.
     currentState = State.square;
 } else if(mode.equals("Circle")){
  currentState = State.circle;
@@ -117,7 +105,7 @@ if (mode.equals("Square")) {
 }
 
 
-void DrawCurrentLines(){
+void DrawCurrentLines(){ // name is pretty self explnatory. runs through all recorded objects within currently drawn pixels arryay list and simply draws them. 
 noStroke();
 for(CurrentDrawing isPixel : drawnpixels){
   fill(isPixel.timedColor);
@@ -126,8 +114,8 @@ for(CurrentDrawing isPixel : drawnpixels){
   } else if(isPixel.timedState == State.circle){
     circle(isPixel.x_loc,isPixel.y_loc,isPixel.size);
   } else if(isPixel.timedState == State.erase){
-  pushStyle();
-  fill(#FFFFFF);
+  pushStyle(); // used push pop style for eraser instead of manually setting the brush color again
+  fill(gui.colorPicker("Background Color").hex);
   circle(isPixel.x_loc,isPixel.y_loc,isPixel.size);
   popStyle();
   }
@@ -141,18 +129,18 @@ for(CurrentDrawing isPixel : drawnpixels){
 
 void mouseDragged(){  
   if(gui.isMouseOutsideGui()){
-     drawnpixels.add(new CurrentDrawing(mouseX,mouseY,gui.sliderInt("Brush Size"),gui.colorPicker("Color Picker").hex,currentState,current_layer));
- }
+     drawnpixels.add(new CurrentDrawing(mouseX,mouseY,gui.sliderInt("Brush Size"),gui.colorPicker("Color Picker").hex,currentState,current_layer)); // actual drawing which is just adding information to arraylist of all drawn pixels
+ }                                                                                                                                                  // i dont know how efficent this is memory wise we just ball
 }
 void keyPressed(){
-int d = day();    
+int d = day();     // time logic
 int m = month();  
 int y = year();
 int s = second(); 
 int mi = minute();  
 int h = hour(); 
 
-if (key == 'S'|| key == 's'){
+if (key == 'S'|| key == 's'){ //saving the picutre
   save(d+"."+m+"."+y+"_"+h+"."+mi+"."+s+".png");
 }
 }

@@ -5,6 +5,23 @@ int size;
 int timedColor;
 State timedState;
 int timedLayer;
+String layer_name;
+int layer_no;
+int frame_no;
+
+
+void LayerGetter(){
+}
+
+void LayerSetter(){
+}
+
+
+void FrameGetter(){
+}
+
+void FrameSetter(){
+}
 
 
 CurrentDrawing(int x,int y,int s,int c, State state,int l){
